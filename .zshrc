@@ -1,4 +1,4 @@
-[ -d "$HOME/.uberc" ] && source "$HOME/.uberc"
+[ -c "$HOME/.uberc" ] && source "$HOME/.uberc"
 
 # Make ls use colors
 export CLICOLOR=1

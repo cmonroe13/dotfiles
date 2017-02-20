@@ -51,4 +51,5 @@ fi
 eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
 alias v="f -e vim" # quick opening files with vim
 
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

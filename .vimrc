@@ -2,7 +2,8 @@ call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -92,3 +93,5 @@ set splitright
 map <C-,> <C-i>
 map <C-.> <C-o>
 
+"FZF fuzzy file search
+nnoremap <C-p> :FZF<cr>

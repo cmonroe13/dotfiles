@@ -16,16 +16,15 @@ source "$HOME/.zplug/init.zsh"
 # zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
 # FASD
-zplug "clvv/fasd"
-eval "$(fasd --init auto)"
-alias v="f -e vim" # quick opening files with vim
+fasd_init_zsh="$HOME/.fasd_init_zsh"
+zplug "clvv/fasd", \
+    as:command, \
+    use:fasd
 
 # Fuzzy Find
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*darwin*amd64*"
+zplug "junegunn/fzf", \
+    dir:"$HOME/.fzf", \
+    hook-build:"zsh $HOME/.fzf/install --all"
 
 # Autosuggestion bundle.
 zplug "zsh-users/zsh-autosuggestions"
@@ -46,6 +45,10 @@ if ! zplug check --verbose; then
 fi
 
 if zplug; then
-    zplug load #--verbose
+    zplug load --verbose
 fi
 
+eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+alias v="f -e vim" # quick opening files with vim
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -45,7 +45,7 @@ if ! zplug check --verbose; then
 fi
 
 if zplug; then
-    zplug load --verbose
+    zplug load #--verbose
 fi
 
 eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"

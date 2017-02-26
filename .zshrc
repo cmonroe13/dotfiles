@@ -6,6 +6,19 @@ export CLICOLOR=1
 # Make grep use colors
 export GREP_OPTIONS="--color=auto"
 
+export HISTFILE="$HOME/.zshistory"
+export HISTSIZE=100
+export SAVEHIST=1000
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+
 bindkey -v
 
 [ ! -d "$HOME/.zplug" ] && curl -sL zplug.sh/installer | zsh

@@ -66,3 +66,20 @@ alias v="f -e vim" # quick opening files with vim
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
+zstyle ':completion:*' max-errors 1 numeric
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' substitute 1
+zstyle :compinstall filename '/Users/corymonroe/.zshrc'
+
+autoload -Uz compinit
+compinit
+
+# End of lines added by compinstall

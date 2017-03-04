@@ -49,7 +49,7 @@ let g:multi_cursor_quit_key='<C-c>'
 set nocompatible		" act more like vim, less like vi
 set backspace=2         " allowed to backspace at all times
 set ignorecase			" searching is no longer case sensitive
-set textwidth=120		" text width is now 80 characters
+set textwidth=80        " text width is now 80 characters
 set ai			        " smart indent
 set si
 set autoread
@@ -66,14 +66,13 @@ set hlsearch
 set wildmenu
 
 "Tabbing
-set tabstop=4			" change tab to look like four spaces
-set shiftwidth=4		" more about indenting
-set softtabstop=4		" more about indenting
+set tabstop=2			" change tab to look like four spaces
+set shiftwidth=2		" more about indenting
+set softtabstop=2		" more about indenting
 set expandtab			" changes tabs to spaces
 set smarttab
 
 set cindent
-set cino=(0
 set cc=80
 
 "Let's be more clear!

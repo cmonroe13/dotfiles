@@ -61,7 +61,15 @@ if zplug; then
     zplug load #--verbose
 fi
 
-eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+eval \
+    "$(fasd --init \
+    posix-alias \
+    zsh-hook \
+    zsh-ccomp \
+    zsh-ccomp-install \
+    zsh-wcomp \
+    zsh-wcomp-install)"
+
 alias v="f -e vim" # quick opening files with vim
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
@@ -75,7 +83,8 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*' max-errors 1 numeric
 zstyle ':completion:*' menu select=1
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' select-prompt \
+    %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 zstyle :compinstall filename '/Users/corymonroe/.zshrc'
 

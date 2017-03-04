@@ -72,6 +72,10 @@ set softtabstop=4		" more about indenting
 set expandtab			" changes tabs to spaces
 set smarttab
 
+set cindent
+set cino=(0
+set cc=80
+
 "Let's be more clear!
 set title				" change the title of the terminal to file name
 set history=1000		" more history!

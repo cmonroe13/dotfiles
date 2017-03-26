@@ -31,13 +31,13 @@ source "$HOME/.zplug/init.zsh"
 # FASD
 fasd_init_zsh="$HOME/.fasd_init_zsh"
 zplug "clvv/fasd", \
-    as:command, \
-    use:fasd
+  as:command, \
+  use:fasd
 
 # Fuzzy Find
 zplug "junegunn/fzf", \
-    dir:"$HOME/.fzf", \
-    hook-build:"zsh $HOME/.fzf/install --all"
+  dir:"$HOME/.fzf", \
+  hook-build:"zsh $HOME/.fzf/install --all"
 
 # Autosuggestion bundle.
 zplug "zsh-users/zsh-autosuggestions"
@@ -46,29 +46,32 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Theme
-zplug "miekg/lean"
+export PROMPT_LEAN_VIMODE=true
+zplug "miekg/lean", \
+  at:4e33a1f
+
 zplug "chriskempson/base16-shell", use:"scripts/base16-eighties.sh", defer:0
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
 fi
 
 if zplug; then
-    zplug load #--verbose
+  zplug load #--verbose
 fi
 
 eval \
-    "$(fasd --init \
-    posix-alias \
-    zsh-hook \
-    zsh-ccomp \
-    zsh-ccomp-install \
-    zsh-wcomp \
-    zsh-wcomp-install)"
+  "$(fasd --init \
+  posix-alias \
+  zsh-hook \
+  zsh-ccomp \
+  zsh-ccomp-install \
+  zsh-wcomp \
+  zsh-wcomp-install)"
 
 alias v="f -e vim" # quick opening files with vim
 
@@ -84,7 +87,7 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*' max-errors 1 numeric
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt \
-    %SScrolling active: current selection at %p%s
+  %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 zstyle :compinstall filename '/Users/corymonroe/.zshrc'
 

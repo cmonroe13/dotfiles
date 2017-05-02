@@ -1,10 +1,8 @@
-[ -e "$HOME/.uberc" ] && source "$HOME/.uberc"
-
-# Make ls use colors
-export CLICOLOR=1
-
-# Make grep use colors
-export GREP_OPTIONS="--color=auto"
+alias ls='ls --color=auto'
+alias la='ls -a --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 export HISTFILE="$HOME/.zshistory"
 export HISTSIZE=100
@@ -21,23 +19,48 @@ setopt HIST_FIND_NO_DUPS
 
 bindkey -v
 
-[ ! -d "$HOME/.zplug" ] && curl -sL zplug.sh/installer | zsh
+[ ! -d "$HOME/.zplug" ] && \
+  curl -sL --proto-redir -all,https \
+  https://zplug.sh/installer | zsh
+
+[ ! -f "$HOME/.vim/autoload/plug.vim" ] && \
+  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 source "$HOME/.zplug/init.zsh"
 
 # Self manage does not play well with commands
 # zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
-# FASD
+# fasd
 fasd_init_zsh="$HOME/.fasd_init_zsh"
 zplug "clvv/fasd", \
   as:command, \
   use:fasd
 
-# Fuzzy Find
+# fzf
 zplug "junegunn/fzf", \
   dir:"$HOME/.fzf", \
-  hook-build:"zsh $HOME/.fzf/install --all"
+  hook-build:"bash $HOME/.fzf/install --all"
+
+# nvm
+zplug "creationix/nvm", \
+  dir:"$HOME/.nvm", \
+  hook-build:"$HOME/.nvm/install.sh | bash"
+
+# peco
+zplug "peco/peco", \
+  from:"gh-r", \
+  as:command, \
+  rename-to:peco, \
+  use:"*linux*amd64*"
+
+# rg
+zplug "BurntSushi/ripgrep", \
+  from:"gh-r", \
+  as:command, \
+  rename-to:rg, \
+  use:"*x86_64*linux*"
 
 # Autosuggestion bundle.
 zplug "zsh-users/zsh-autosuggestions"
@@ -75,8 +98,8 @@ eval \
 
 alias v="f -e vim" # quick opening files with vim
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 # The following lines were added by compinstall
 

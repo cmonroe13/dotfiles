@@ -46,7 +46,7 @@ zplug "junegunn/fzf", \
 # nvm
 zplug "creationix/nvm", \
   dir:"$HOME/.nvm", \
-  hook-build:"$HOME/.nvm/install.sh | bash"
+  hook-build:"bash $HOME/.nvm/install.sh"
 
 # peco
 zplug "peco/peco", \
@@ -99,7 +99,7 @@ eval \
 alias v="f -e vim" # quick opening files with vim
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # The following lines were added by compinstall
 
@@ -121,3 +121,4 @@ compinit
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

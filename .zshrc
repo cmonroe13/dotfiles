@@ -39,6 +39,11 @@ zplug "clvv/fasd", \
   use:fasd
 
 # fzf
+zplug "peco/peco", \
+  as:command, \
+  from:gh-r
+
+# Fuzzy Find
 zplug "junegunn/fzf", \
   dir:"$HOME/.fzf", \
   hook-build:"bash $HOME/.fzf/install --all"

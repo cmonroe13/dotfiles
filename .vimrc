@@ -17,7 +17,7 @@ Plug 'ajh17/vimcompletesme'
 Plug 'xevz/vim-squirrel'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 call plug#end()
 
 "Enable Plugins

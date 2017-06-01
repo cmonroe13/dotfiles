@@ -1,8 +1,18 @@
-alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+PLATFORM=$(uname -s)
+
+if [[ $PLATFORM = 'Darwin' ]]; then
+  alias ls='ls -G'
+  alias la='ls -a -G'
+  alias grep='grep -G'
+  alias fgrep='fgrep -G'
+  alias egrep='egrep -G'
+elif [[ $PLATFORM = 'Linux' ]]; then
+  alias ls='ls --color=auto'
+  alias la='ls -a --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
 
 export HISTFILE="$HOME/.zshistory"
 export HISTSIZE=100

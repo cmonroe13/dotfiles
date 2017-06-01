@@ -98,6 +98,3 @@ map <C-.> <C-o>
 
 "FZF fuzzy file search
 nnoremap <C-p> :FZF<cr>
-
-"Tagbar toggle
-nnoremap <C-i> :TagbarToggle<cr>

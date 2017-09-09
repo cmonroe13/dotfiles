@@ -1,4 +1,5 @@
-[ -e "$HOME/.uberc" ] && source "$HOME/.uberc"
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 
 # Make ls use colors
 export CLICOLOR=1
@@ -8,9 +9,7 @@ export GREP_OPTIONS='--color=auto'
 
 CYAN='\[\e[0;36m\]'
 
-PS1="$CYAN\w % \[$(tput sgr0)\]"
-
-[ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
+PS1="$CYAN\w > \[$(tput sgr0)\]"
 
 [ -s "/usr/local/etc/bash_completion" ] && source "/usr/local/etc/bash_completion"
 

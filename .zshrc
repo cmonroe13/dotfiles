@@ -15,8 +15,8 @@ elif [[ $PLATFORM = 'Linux' ]]; then
 fi
 
 export HISTFILE="$HOME/.zshistory"
-export HISTSIZE=100
-export SAVEHIST=1000
+export HISTSIZE=1000
+export SAVEHIST=10000
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
@@ -29,9 +29,13 @@ setopt HIST_FIND_NO_DUPS
 
 bindkey -v
 
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
+
 [ ! -d "$HOME/.zplug" ] && \
   curl -sL --proto-redir -all,https \
-  https://zplug.sh/installer | zsh
+  https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 [ ! -f "$HOME/.vim/autoload/plug.vim" ] && \
   curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
@@ -42,40 +46,29 @@ source "$HOME/.zplug/init.zsh"
 # Self manage does not play well with commands
 # zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
-# fasd
-fasd_init_zsh="$HOME/.fasd_init_zsh"
-zplug "clvv/fasd", \
-  as:command, \
-  use:fasd
-
-# fzf
-zplug "peco/peco", \
-  as:command, \
-  from:gh-r
-
 # Fuzzy Find
 zplug "junegunn/fzf", \
   dir:"$HOME/.fzf", \
   hook-build:"bash $HOME/.fzf/install --all"
 
-# nvm
-zplug "creationix/nvm", \
-  dir:"$HOME/.nvm", \
-  hook-build:"bash $HOME/.nvm/install.sh"
+zplug "lukechilds/zsh-nvm"
+
+# fasd
+zplug "clvv/fasd", \
+  as:command, \
+  use:fasd
 
 # peco
 zplug "peco/peco", \
   from:"gh-r", \
   as:command, \
-  rename-to:peco, \
-  use:"*linux*amd64*"
+  rename-to:peco
 
 # rg
 zplug "BurntSushi/ripgrep", \
   from:"gh-r", \
   as:command, \
-  rename-to:rg, \
-  use:"*x86_64*linux*"
+  rename-to:rg
 
 # Autosuggestion bundle.
 zplug "zsh-users/zsh-autosuggestions"
@@ -84,9 +77,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Theme
-export PROMPT_LEAN_VIMODE=true
-zplug "miekg/lean", \
-  at:4e33a1f
+zplug "subnixr/minimal"
 
 zplug "chriskempson/base16-shell", use:"scripts/base16-eighties.sh", defer:0
 
@@ -102,14 +93,7 @@ if zplug; then
   zplug load #--verbose
 fi
 
-eval \
-  "$(fasd --init \
-  posix-alias \
-  zsh-hook \
-  zsh-ccomp \
-  zsh-ccomp-install \
-  zsh-wcomp \
-  zsh-wcomp-install)"
+eval "$(fasd --init auto)"
 
 alias v="f -e vim" # quick opening files with vim
 

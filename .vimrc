@@ -14,7 +14,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'bling/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'ajh17/vimcompletesme'
-Plug 'xevz/vim-squirrel'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
@@ -31,6 +30,8 @@ let mapleader=" "
 
 "Nerd Tree
 map <C-o> :NERDTreeToggle<CR>
+
+map <Tab> :TagbarToggle<CR>
 
 "Theme
 syntax enable

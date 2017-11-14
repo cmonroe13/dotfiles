@@ -17,6 +17,7 @@ Plug 'ajh17/vimcompletesme'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 "Enable Plugins

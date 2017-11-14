@@ -46,6 +46,11 @@ source "$HOME/.zplug/init.zsh"
 # Self manage does not play well with commands
 # zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
+# dep
+zplug "golang/dep", \
+  from:"gh-r", \
+  as:command
+
 # Fuzzy Find
 zplug "junegunn/fzf", \
   dir:"$HOME/.fzf", \
@@ -109,7 +114,7 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*' max-errors 1 numeric
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt \
-  %SScrolling active: current selection at %p%s
+ -  %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 zstyle :compinstall filename '/Users/corymonroe/.zshrc'
 
@@ -121,3 +126,5 @@ compinit
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.cargo/bin:$PATH"

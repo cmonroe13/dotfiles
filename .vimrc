@@ -1,23 +1,26 @@
 call plug#begin()
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
+Plug 'cespare/vim-toml'
+Plug 'chriskempson/base16-vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
+Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'easymotion/vim-easymotion'
-Plug 'raimondi/delimitmate'
-Plug 'ervandew/supertab'
 Plug 'pangloss/vim-javascript'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'bling/vim-airline'
-Plug 'godlygeek/tabular'
-Plug 'ajh17/vimcompletesme'
-Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go'
-Plug 'w0rp/ale'
+Plug 'racer-rust/vim-racer'
+Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 call plug#end()
 
 "Enable Plugins
@@ -37,6 +40,9 @@ map <Tab> :TagbarToggle<CR>
 "Theme
 syntax enable
 set background=dark
+let base16colorspace=256
+colorscheme base16-eighties
+let g:airline_theme='base16_eighties'
 
 "Easy Motion
 map <Leader> <Plug>(easymotion-prefix)
@@ -48,12 +54,14 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<C-c>'
 
+let g:ale_linters = {'cpp': ['clangtidy']}
+
 "General
-set nocompatible		" act more like vim, less like vi
-set backspace=2         " allowed to backspace at all times
-set ignorecase			" searching is no longer case sensitive
-set textwidth=80        " text width is now 80 characters
-set ai			        " smart indent
+set nocompatible
+set backspace=2
+set ignorecase
+set textwidth=80
+set ai
 set si
 set autoread
 set ruler
@@ -69,21 +77,21 @@ set hlsearch
 set wildmenu
 
 "Tabbing
-set tabstop=2			" change tab to look like four spaces
-set shiftwidth=2		" more about indenting
-set softtabstop=2		" more about indenting
-set expandtab			" changes tabs to spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 set smarttab
 
 set cindent
 set cc=80
 
 "Let's be more clear!
-set title				" change the title of the terminal to file name
-set history=1000		" more history!
-set undolevels=1000	    " more undo levels!
-set number				" label the numbers of each line
-set numberwidth=4		" cap line cout at 99999
+set title
+set history=1000
+set undolevels=1000
+set number
+set numberwidth=4
 
 "Change window splits
 map <C-j> <C-w>j
@@ -100,3 +108,5 @@ map <C-.> <C-o>
 
 "FZF fuzzy file search
 nnoremap <C-p> :FZF<cr>
+
+tnoremap <ESC><ESC> <C-\><C-N>

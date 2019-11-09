@@ -69,7 +69,7 @@ zle -N edit-command-line
 
 [ ! -d "$HOME/.go" ] && \
   curl -sfSL --proto-redir -all,https \
-  https://dl.google.com/go/go1.13.3.$PLATFORM-amd64.tar.gz | \
+  https://dl.google.com/go/go1.13.3.{(L)$PLATFORM}-amd64.tar.gz | \
   tar -C $HOME -xz && \
   mv $HOME/go $HOME/.go
 

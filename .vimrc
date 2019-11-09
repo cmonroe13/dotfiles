@@ -6,7 +6,6 @@ Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'pangloss/vim-javascript'
 Plug 'racer-rust/vim-racer'
 Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'

@@ -3,14 +3,14 @@ PLATFORM=$(uname -s)
 if [[ $PLATFORM = 'Darwin' ]]; then
   alias ls='ls -G'
   alias la='ls -a -G'
-  alias ll='ls -l -G'
+  alias ll='ls -la -G'
   alias grep='grep -G'
   alias fgrep='fgrep -G'
   alias egrep='egrep -G'
 elif [[ $PLATFORM = 'Linux' ]]; then
   alias ls='ls --color=auto'
   alias la='ls -a --color=auto'
-  alias ll='ls -l --color=auto'
+  alias ll='ls -la --color=auto'
   alias grep='grep --color=auto'
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
@@ -134,4 +134,4 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.go/bin:$PATH"
 
-export PATH="/home/moo/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

@@ -2,8 +2,6 @@ call plug#begin()
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'ervandew/supertab'
-Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -25,9 +23,6 @@ call plug#end()
 
 "Enable Plugins
 filetype plugin on
-
-"Disable scratch preview
-set completeopt-=preview
 
 "Leader
 let mapleader=" "
@@ -54,7 +49,16 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<C-c>'
 
-let g:ale_linters = {'cpp': ['clangtidy']}
+let g:ale_completion_enabled = 1
+let g:ale_linters = {
+  \ 'cpp': ['clangtidy'],
+  \ 'go': ['gofmt', 'golint', 'gopls', 'govet'],
+	\}
+
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+  \ 'go': ['goimports'],
+	\}
 
 "General
 set nocompatible

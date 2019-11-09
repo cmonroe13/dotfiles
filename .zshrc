@@ -1,7 +1,3 @@
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte-2.91.sh
-fi
-
 PLATFORM=$(uname -s)
 
 if [[ $PLATFORM = 'Darwin' ]]; then
@@ -73,7 +69,7 @@ zle -N edit-command-line
 
 [ ! -d "$HOME/.go" ] && \
   curl -sfSL --proto-redir -all,https \
-  https://dl.google.com/go/go1.12.linux-amd64.tar.gz | \
+  https://dl.google.com/go/go1.13.3.$PLATFORM-amd64.tar.gz | \
   tar -C $HOME -xz && \
   mv $HOME/go $HOME/.go
 
@@ -87,17 +83,6 @@ zplug "junegunn/fzf", \
 
 zplug "pyenv/pyenv-installer", \
   hook-build:"[ ! -d $HOME/.pyenv ] && bash bin/pyenv-installer"
-
-zplug "mitsuhiko/pipsi", \
-  if:"[[ -f $HOME/.pyenv/version && $(cat $HOME/.pyenv/version) != 'system' ]]", \
-  hook-build:"python get-pipsi.py"
-
-zplug "sdispater/poetry", \
-  hook-build:"python get-poetry.py"
-
-zplug "creationix/nvm", \
-  dir:"$HOME/.nvm", \
-  hook-build:"bash $HOME/.nvm/install.sh"
 
 zplug "clvv/fasd", \
   use:fasd, \
@@ -143,12 +128,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s $NVM_DIR/nvm.sh ] && source $NVM_DIR/nvm.sh --no-use
-[[ -r $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
-
-export PATH="$HOME/.poetry/bin:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 

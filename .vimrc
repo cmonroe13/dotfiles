@@ -1,11 +1,14 @@
 call plug#begin()
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
+Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'racer-rust/vim-racer'
 Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'
@@ -29,7 +32,7 @@ let mapleader=" "
 "Nerd Tree
 map <C-o> :NERDTreeToggle<CR>
 
-map <Tab> :TagbarToggle<CR>
+map <Tab> :Vista!!<CR>
 
 "Theme
 syntax enable
@@ -58,6 +61,9 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
   \ 'go': ['goimports'],
 	\}
+
+let g:airline#extensions#tmuxline#enabled = 1
+let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
 
 "General
 set nocompatible
@@ -110,6 +116,8 @@ map <C-,> <C-i>
 map <C-.> <C-o>
 
 "FZF fuzzy file search
-nnoremap <C-p> :FZF<cr>
+nnoremap <C-p> :Files<cr>
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({}), <bang>0)
 
 tnoremap <ESC><ESC> <C-\><C-N>

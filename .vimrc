@@ -2,25 +2,23 @@ call plug#begin()
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/tmuxline.vim'
-Plug 'godlygeek/tabular'
+Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vista.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'racer-rust/vim-racer'
 Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'zah/nim.vim'
 call plug#end()
 
 "Enable Plugins
@@ -33,6 +31,10 @@ let mapleader=" "
 map <C-o> :NERDTreeToggle<CR>
 
 map <Tab> :Vista!!<CR>
+let g:vista_sidebar_width = 60
+let g:vista_executive_for = {
+  \ 'cpp': 'ale',
+  \ }
 
 "Theme
 syntax enable
@@ -41,19 +43,9 @@ let base16colorspace=256
 colorscheme base16-eighties
 let g:airline_theme='base16_eighties'
 
-"Easy Motion
-map <Leader> <Plug>(easymotion-prefix)
-
-"Multiple Cursors
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<C-c>'
-
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
-  \ 'cpp': ['clangtidy'],
+  \ 'cpp': ['ccls', 'clangtidy'],
   \ 'go': ['gofmt', 'golint', 'gopls', 'govet'],
 	\}
 
@@ -74,7 +66,6 @@ set ai
 set si
 set autoread
 set ruler
-set hlsearch
 set noswapfile
 set cursorline
 

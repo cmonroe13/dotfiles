@@ -1,13 +1,13 @@
 PLATFORM=$(uname -s)
 
-if [[ $PLATFORM = 'Darwin' ]]; then
+if [[ $PLATFORM:l = 'darwin' ]]; then
   alias ls='ls -G'
   alias la='ls -a -G'
   alias ll='ls -la -G'
   alias grep='grep -G'
   alias fgrep='fgrep -G'
   alias egrep='egrep -G'
-elif [[ $PLATFORM = 'Linux' ]]; then
+elif [[ $PLATFORM:l = 'linux' ]]; then
   alias ls='ls --color=auto'
   alias la='ls -a --color=auto'
   alias ll='ls -la --color=auto'
@@ -69,13 +69,16 @@ zle -N edit-command-line
 
 [ ! -d "$HOME/.go" ] && \
   curl -sfSL --proto-redir -all,https \
-  https://dl.google.com/go/go1.13.3.{(L)$PLATFORM}-amd64.tar.gz | \
+  https://dl.google.com/go/go1.13.3.$PLATFORM:l-amd64.tar.gz | \
   tar -C $HOME -xz && \
   mv $HOME/go $HOME/.go
 
 source "$HOME/.zplug/init.zsh"
 
 zplug "zplug/zplug", hook-build:"zplug --self-manage"
+
+zplug "tmux-plugins/tpm", \
+  dir:"$HOME/.tmux/plugins/tpm"
 
 zplug "junegunn/fzf", \
   dir:"$HOME/.fzf", \
@@ -85,8 +88,13 @@ zplug "pyenv/pyenv-installer", \
   hook-build:"[ ! -d $HOME/.pyenv ] && bash bin/pyenv-installer"
 
 zplug "clvv/fasd", \
-  use:fasd, \
-  as:command
+  as:command, \
+  use:fasd
+
+zplug "grailbio/bazel-compilation-database", \
+  as:command, \
+  use:generate.sh, \
+  rename-to:bazel-compdb
 
 zplug "stedolan/jq", \
   from:gh-r, \
@@ -102,6 +110,15 @@ zplug "BurntSushi/ripgrep", \
   from:gh-r, \
   as:command, \
   rename-to:rg
+
+zplug "sharkdp/bat", \
+  from:gh-r, \
+  as:command, \
+  use:"*x86_64*$PLATFORM:l*.tar.gz"
+
+zplug "sharkdp/fd", \
+  from:gh-r, \
+  as:command
 
 zplug "zsh-users/zsh-autosuggestions"
 
@@ -135,3 +152,5 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.go/bin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="/home/moo/.nimble/bin:$PATH"

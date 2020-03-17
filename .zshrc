@@ -82,7 +82,7 @@ zplug "tmux-plugins/tpm", \
 
 zplug "junegunn/fzf", \
   dir:"$HOME/.fzf", \
-  hook-build:"bash $HOME/.fzf/install --all --no-bash"
+  hook-build:"bash $HOME/.fzf/install --all"
 
 zplug "pyenv/pyenv-installer", \
   hook-build:"[ ! -d $HOME/.pyenv ] && bash bin/pyenv-installer"
@@ -153,4 +153,4 @@ export PATH="$HOME/.go/bin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
 
-export PATH="/home/moo/.nimble/bin:$PATH"
+export PATH="$HOME/.nimble/bin:$PATH"

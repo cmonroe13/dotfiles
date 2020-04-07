@@ -7,7 +7,8 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vista.vim'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'puremourning/vimspector'
 Plug 'racer-rust/vim-racer'
 Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'
@@ -33,8 +34,8 @@ map <C-o> :NERDTreeToggle<CR>
 map <Tab> :Vista!!<CR>
 let g:vista_sidebar_width = 60
 let g:vista_executive_for = {
-  \ 'cpp': 'ale',
-  \ }
+\  'cpp': 'ale',
+\}
 
 "Theme
 syntax enable
@@ -43,16 +44,30 @@ let base16colorspace=256
 colorscheme base16-eighties
 let g:airline_theme='base16_eighties'
 
-let g:ale_completion_enabled = 1
+let g:ale_cpp_ccls_init_options = {
+\  'cache': {
+\    'directory': './.ccls-cache'
+\  }
+\}
+
+let g:ale_completion_enabled = 0
 let g:ale_linters = {
-  \ 'cpp': ['ccls', 'clangtidy'],
-  \ 'go': ['gofmt', 'golint', 'gopls', 'govet'],
-	\}
+\  'cpp': ['ccls'],
+\  'go': ['gofmt', 'gopls'],
+\}
 
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-  \ 'go': ['goimports'],
-	\}
+\  'cpp': ['clangtidy'],
+\  'go': ['goimports'],
+\}
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:airline#extensions#tmuxline#enabled = 1
 let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"

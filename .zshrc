@@ -73,6 +73,15 @@ zle -N edit-command-line
   tar -C $HOME -xz && \
   mv $HOME/go $HOME/.go
 
+[ ! -f "$HOME/go/bin/dlv" ] && \
+  go get -u github.com/go-delve/delve/cmd/dlv
+
+[ ! -f "$HOME/go/bin/goimports" ] && \
+  go get golang.org/x/tools/cmd/goimports
+
+[ ! -f "$HOME/go/bin/gopls" ] && \
+  GO111MODULE=on go get golang.org/x/tools/gopls@latest
+
 source "$HOME/.zplug/init.zsh"
 
 zplug "zplug/zplug", hook-build:"zplug --self-manage"
@@ -86,6 +95,8 @@ zplug "junegunn/fzf", \
 
 zplug "pyenv/pyenv-installer", \
   hook-build:"[ ! -d $HOME/.pyenv ] && bash bin/pyenv-installer"
+
+zplug "lukechilds/zsh-nvm"
 
 zplug "clvv/fasd", \
   as:command, \
@@ -142,6 +153,8 @@ alias v="f -e vim" # quick opening files with vim
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+kitty + complete setup zsh | source /dev/stdin
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"

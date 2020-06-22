@@ -1,12 +1,15 @@
 call plug#begin()
+Plug 'bazelbuild/vim-ft-bzl'
 Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vista.vim'
+Plug 'mike-hearn/base16-vim-lightline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'puremourning/vimspector'
 Plug 'racer-rust/vim-racer'
@@ -16,37 +19,20 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'zah/nim.vim'
 call plug#end()
 
-"Enable Plugins
-filetype plugin on
+nmap <C-o> :NERDTreeToggle<CR>
 
-"Leader
-let mapleader=" "
-
-"Nerd Tree
-map <C-o> :NERDTreeToggle<CR>
-
-map <Tab> :Vista!!<CR>
-let g:vista_sidebar_width = 60
+nmap <C-i> :Vista!!<CR>
+let g:vista_sidebar_width = 64
 let g:vista_executive_for = {
 \  'cpp': 'ale',
 \}
 
-"Theme
-syntax enable
-set background=dark
-let base16colorspace=256
-colorscheme base16-eighties
-let g:airline_theme='base16_eighties'
-
 let g:ale_cpp_ccls_init_options = {
 \  'cache': {
-\    'directory': './.ccls-cache'
+\    'directory': '.ccls-cache'
 \  }
 \}
 
@@ -69,61 +55,65 @@ nmap <silent> gr <Plug>(coc-references)
 
 let g:vimspector_enable_mappings = 'HUMAN'
 
-let g:airline#extensions#tmuxline#enabled = 1
-let airline#extensions#tmuxline#snapshot_file = "~/.tmux-status.conf"
+nnoremap <C-p> :Files<cr>
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({}), <bang>0)
 
-"General
-set nocompatible
-set backspace=2
-set ignorecase
-set textwidth=80
-set ai
-set si
+let g:lightline = {
+\  'component_function': {
+\  },
+\  'colorscheme': 'base16_embers',
+\}
+
+let g:tmuxline_powerline_separators = 0
+
+let base16colorspace=256
+colorscheme base16-embers
+
+set backspace=indent,eol,start
+
+set autoindent
+set smartindent
+
 set autoread
+
 set ruler
+
 set noswapfile
+
 set cursorline
 
-"Search
+set ignorecase
 set incsearch
 set hlsearch
 
-"Menu
 set wildmenu
 
-"Tabbing
 set tabstop=2
-set shiftwidth=2
 set softtabstop=2
 set expandtab
+set shiftwidth=2
 set smarttab
 
 set cindent
 set cc=80
 
-"Let's be more clear!
 set title
-set history=1000
-set undolevels=1000
-set number
-set numberwidth=4
+set history=8192
+set undolevels=8192
 
-"Change window splits
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+set number relativenumber
+set nu rnu
+
+set laststatus=2
+
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
 
 set splitbelow
 set splitright
 
-"Jump remap
-map <C-,> <C-i>
-map <C-.> <C-o>
-
-"FZF fuzzy file search
-nnoremap <C-p> :Files<cr>
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({}), <bang>0)
-
-tnoremap <ESC><ESC> <C-\><C-N>
+nmap <C-,> <C-i>
+nmap <C-.> <C-o>
